@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="img/puzzle.png">
+    <title>8 Puzzle - Searches</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <header>
+        <div style="text-align:center;margin:30px;margin-bottom:10px;">
+            <h3>8 Puzzle</h3>
+            <h4>Searches</h4>
+        </div>
+    </header>
+    <main role="main">
+        <div class="container" style="padding: 0px;">
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div id="search_depth" class="col-lg-2 search">
+                    <span align="center">Depth First Search</span>
+                    <div class="puzzle">
+                        <table style="margin:auto auto;">
+                            <tr>
+                                <td><img id="0_0_depth" src="img/cat_0.png" width="60" height="50"></td>
+                                <td><img id="0_1_depth" src="img/cat_1.png" width="60" height="50"></td>
+                                <td><img id="0_2_depth" src="img/cat_2.png" width="60" height="50"></td>
+                            </tr>
+                            <tr>
+                                <td><img id="1_0_depth" src="img/cat_3.png" width="60" height="50"></td>
+                                <td><img id="1_1_depth" src="img/cat_4.png" width="60" height="50"></td>
+                                <td><img id="1_2_depth" src="img/cat_5.png" width="60" height="50"></td>
+                            </tr>
+                            <tr>
+                                <td><img id="2_0_depth" src="img/cat_6.png" width="60" height="50"></td>
+                                <td><img id="2_1_depth" src="img/cat_7.png" width="60" height="50"></td>
+                                <td><img id="2_2_depth" src="img/cat_8.png" width="60" height="50"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card info_search">
+                        <ul class="list-group list-group-flush">
+                            <li id="time_depth"   class="list-group-item" style="padding: 5px; font-size:12px;">Time: 00:00:00</li>
+                            <li id="states_depth" class="list-group-item" style="padding: 5px; font-size:12px;">Visited States: 0</li>
+                            <li id="status_depth" class="list-group-item" style="padding: 5px; font-size:12px;">Status: -</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="search_breadth" class="col-lg-2 search">
+                    <span align="center">Breadth First Search</span>
+                    <div class="puzzle">
+                        <table style="margin:auto auto;">
+                            <tr>
+                                <td><img id="0_0_breadth" src="img/cat_0.png" width="60" height="50"></td>
+                                <td><img id="0_1_breadth" src="img/cat_1.png" width="60" height="50"></td>
+                                <td><img id="0_2_breadth" src="img/cat_2.png" width="60" height="50"></td>
+                            </tr>
+                            <tr>
+                                <td><img id="1_0_breadth" src="img/cat_3.png" width="60" height="50"></td>
+                                <td><img id="1_1_breadth" src="img/cat_4.png" width="60" height="50"></td>
+                                <td><img id="1_2_breadth" src="img/cat_5.png" width="60" height="50"></td>
+                            </tr>
+                            <tr>
+                                <td><img id="2_0_breadth" src="img/cat_6.png" width="60" height="50"></td>
+                                <td><img id="2_1_breadth" src="img/cat_7.png" width="60" height="50"></td>
+                                <td><img id="2_2_breadth" src="img/cat_8.png" width="60" height="50"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card info_search">
+                        <ul class="list-group list-group-flush">
+                            <li id="time_breadth"   class="list-group-item" style="padding: 5px; font-size:12px;">Time: 00:00:00</li>
+                            <li id="states_breadth" class="list-group-item" style="padding: 5px; font-size:12px;">Visited States: 0</li>
+                            <li id="status_breadth" class="list-group-item" style="padding: 5px; font-size:12px;">Status: -</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="search_greedy1" class="col-lg-2 search">
+                    <span align="center">Greedy Search (H1)</span>
+                    <div class="puzzle">
+                        <table style="margin:auto auto;">
+                            <tr>
+                                <td><img id="0_0_greedy1" src="img/cat_0.png" width="60" height="50"></td>
+                                <td><img id="0_1_greedy1" src="img/cat_1.png" width="60" height="50"></td>
+                                <td><img id="0_2_greedy1" src="img/cat_2.png" width="60" height="50"></td>
+                            </tr>
+                            <tr>
+                                <td><img id="1_0_greedy1" src="img/cat_3.png" width="60" height="50"></td>
+                                <td><img id="1_1_greedy1" src="img/cat_4.png" width="60" height="50"></td>
+                                <td><img id="1_2_greedy1" src="img/cat_5.png" width="60" height="50"></td>
+                            </tr>
+                            <tr>
+                                <td><img id="2_0_greedy1" src="img/cat_6.png" width="60" height="50"></td>
+                                <td><img id="2_1_greedy1" src="img/cat_7.png" width="60" height="50"></td>
+                                <td><img id="2_2_greedy1" src="img/cat_8.png" width="60" height="50"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card info_search">
+                        <ul class="list-group list-group-flush">
+                            <li id="time_greedy1"   class="list-group-item" style="padding: 5px; font-size:12px;">Time: 00:00:00</li>
+                            <li id="states_greedy1" class="list-group-item" style="padding: 5px; font-size:12px;">Visited States: 0</li>
+                            <li id="status_greedy1" class="list-group-item" style="padding: 5px; font-size:12px;">Status: -</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="search_greedy2" class="col-lg-2 search">
+                    <span align="center">Greedy Search (H2)</span>
+                    <div class="puzzle">
+                        <table style="margin:auto auto;">
+                            <tr>
+                                <td><img id="0_0_greedy2" src="img/cat_0.png" width="60" height="50"></td>
+                                <td><img id="0_1_greedy2" src="img/cat_1.png" width="60" height="50"></td>
+                                <td><img id="0_2_greedy2" src="img/cat_2.png" width="60" height="50"></td>
+                            </tr>
+                            <tr>
+                                <td><img id="1_0_greedy2" src="img/cat_3.png" width="60" height="50"></td>
+                                <td><img id="1_1_greedy2" src="img/cat_4.png" width="60" height="50"></td>
+                                <td><img id="1_2_greedy2" src="img/cat_5.png" width="60" height="50"></td>
+                            </tr>
+                            <tr>
+                                <td><img id="2_0_greedy2" src="img/cat_6.png" width="60" height="50"></td>
+                                <td><img id="2_1_greedy2" src="img/cat_7.png" width="60" height="50"></td>
+                                <td><img id="2_2_greedy2" src="img/cat_8.png" width="60" height="50"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card info_search">
+                        <ul class="list-group list-group-flush">
+                            <li id="time_greedy2"   class="list-group-item" style="padding: 5px; font-size:12px;">Time: 00:00:00</li>
+                            <li id="states_greedy2" class="list-group-item" style="padding: 5px; font-size:12px;">Visited States: 0</li>
+                            <li id="status_greedy2" class="list-group-item" style="padding: 5px; font-size:12px;">Status: -</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="search_greedy3" class="col-lg-2 search">
+                    <span align="center">Greedy Search (H3)</span>
+                    <div class="puzzle">
+                        <table style="margin:auto auto;">
+                            <tr>
+                                <td><img id="0_0_greedy3" src="img/cat_0.png" width="60" height="50"></td>
+                                <td><img id="0_1_greedy3" src="img/cat_1.png" width="60" height="50"></td>
+                                <td><img id="0_2_greedy3" src="img/cat_2.png" width="60" height="50"></td>
+                            </tr>
+                            <tr>
+                                <td><img id="1_0_greedy3" src="img/cat_3.png" width="60" height="50"></td>
+                                <td><img id="1_1_greedy3" src="img/cat_4.png" width="60" height="50"></td>
+                                <td><img id="1_2_greedy3" src="img/cat_5.png" width="60" height="50"></td>
+                            </tr>
+                            <tr>
+                                <td><img id="2_0_greedy3" src="img/cat_6.png" width="60" height="50"></td>
+                                <td><img id="2_1_greedy3" src="img/cat_7.png" width="60" height="50"></td>
+                                <td><img id="2_2_greedy3" src="img/cat_8.png" width="60" height="50"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card info_search">
+                        <ul class="list-group list-group-flush">
+                            <li id="time_greedy3"   class="list-group-item" style="padding: 5px; font-size:12px;">Time: 00:00:00</li>
+                            <li id="states_greedy3" class="list-group-item" style="padding: 5px; font-size:12px;">Visited States: 0</li>
+                            <li id="status_greedy3" class="list-group-item" style="padding: 5px; font-size:12px;">Status: -</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            <div class="row" style="margin-top: 20px;margin-bottom: 30px;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7 manage_search" style="height: 300px;overflow-y: auto; padding-left: 4px;">
+                    <table class="table" id="table_result" style="display:none; width: 102%">
+                        <thead class="thead-dark" style="padding: .20rem;">
+                            <tr>
+                                <th scope="col" style="font-size: 14px; padding: .35rem;">#</th>
+                                <th scope="col" style="font-size: 14px; padding: .35rem;">DFS</th>
+                                <th scope="col" style="font-size: 14px; padding: .35rem;">BFS</th>
+                                <th scope="col" style="font-size: 14px; padding: .35rem;">GS (H1)</th>
+                                <th scope="col" style="font-size: 14px; padding: .35rem;">GS (H2)</th>
+                                <th scope="col" style="font-size: 14px; padding: .35rem;">GS (H3)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="result_search" >
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-3 manage_search">
+                    <table style="width:280px;;margin:auto auto;margin-bottom: 10px;">
+                        <tr>
+                            <td colspan="2">
+                                <label style="font-size: 14px;">States Limit</label>
+                                <input type="number" min="1" max="1000000" value="5000" class="form-control" id="states_limit" placeholder="Default 5000">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="padding-top: 10px;">
+                                <label style="font-size: 14px;">Speed (ms)</label>
+                                <input type="range" min="1" max="1000" value="500" class="form-control-range" onchange="changeSpeed();" id="speed">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;"><small class="form-text text-muted">1</small></td>
+                            <td style="text-align: right;"><small class="form-text text-muted">1000</small></td>
+                        </tr>
+                    </table>
+                    <table style="width:280px;;margin:auto auto;margin-bottom: 30px;">
+                        <tr>
+                            <td style="text-align: left;">
+                                <button id="start" type="button" class="btn btn-dark" style="width: 85px; font-size:14px;" onclick="start();">Start</button>
+                            </td>
+                            <td style="text-align: center;">
+                                <button id="stop" type="button" disabled class="btn btn-dark" style="width: 85px; font-size:14px;" onclick="stop();">Stop</button>
+                            </td>
+                            <td style="text-align: right;">
+                                <button id="restart" type="button" disabled class="btn btn-dark" style="width: 85px; font-size:14px;" onclick="restart();">Restart</button>
+                            </td>
+                        </tr>
+                        <tr><td colspan="3">&nbsp;</td><tr>
+                        <tr>
+                            <td colspan="3">
+                                <button id="start_many" type="button" class="btn btn-dark" style="width: 100%; font-size:14px;" onclick="startMany(100);">Execute 100 Times</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="puzzle.js"></script>
+    <script type="text/javascript">
+        initSearch();
+    </script>
+  </body>
+</html>
