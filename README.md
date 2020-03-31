@@ -1,5 +1,5 @@
-# 8puzzle
-Searches - 8 Puzzle Problem
+# Puzzle
+Searches - Puzzle Problem
 
 - **Initial State**: Puzzle shuffled
 - **Final State**: Puzzle ordered
