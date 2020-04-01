@@ -5,8 +5,7 @@
  * Created: 2018-09-09
  **/
 
-function GreedySearch(id, heuristic){
-	AbstractSearch.call(this);
+function GreedySearch(id, heuristic) {
 	this.id             = id;
 	this.heuristic      = heuristic;
 	this.states_visited = [];
@@ -17,18 +16,17 @@ function GreedySearch(id, heuristic){
 var greedy_search;
 
 self.onmessage = event => {
-	var data = event.data;
+	let data = event.data;
   	switch (data['command']) {
     	case 'init': 
-			
 			// Call template Abstract Search
-    		importScripts(data['path']+'/AbstractSearch.js');
+    		importScripts(data['path'] + '/AbstractSearch.js');
     		GreedySearch.prototype = new AbstractSearch();
 
 			// H1
     		GreedySearch.prototype.processHeuristic1 = function(state) {
-				var shuffe = 0
-				for (var s in state){
+				let shuffe = 0
+				for (let s in state) {
 					if (s != state[s]) shuffe += 1;
 				}
 				return shuffe;
@@ -36,32 +34,17 @@ self.onmessage = event => {
 
 			// H2
 			GreedySearch.prototype.processHeuristic2 = function(state) {
-				var distance = 0;
-				var s = 0;
-				for (var line=0;line<=this.lines;line++){
-					for(var column=0;column<=this.columns;column++){
-						if (state[s] > 0){
+				let distance = 0;
+				let s = 0;
+				for (let line=0; line<=this.lines; line++) {
+					for (let column=0; column<=this.columns; column++) {
+						if (state[s] > 0) {
 							distance += (Math.abs(this.pos_expected[state[s]][0]-line) + Math.abs(this.pos_expected[state[s]][1]-column));
 						}
 						s += 1;
 					}
 				}
 				return distance;
-			}
-
-			// H3
-			GreedySearch.prototype.processHeuristic3 = function(state) {
-				var order = state.length;
-				var s = 0;
-				for (var line=0;line<=this.lines;line++){
-					for(var column=0;column<=this.columns;column++){
-						if ((column == this.columns || line == this.lines) && s == state[s]){
-							order -= 1;
-						}
-					}
-					s += 1;
-				}
-				return order;
 			}
 
 			GreedySearch.prototype.processHeuristics = function(state) {
@@ -71,49 +54,49 @@ self.onmessage = event => {
 			}
 
 			GreedySearch.prototype.chooseState = async function() {
-				if (!this.checkStateExpected()){
-					if (!this.stoped){
-						var state = [];
+				if (!this.checkStateExpected()) {
+					if (!this.stoped) {
+						let state = [];
 
 						// Check left
-						if ((this.empty[1]-1) >= 0){
+						if ((this.empty[1]-1) >= 0) {
 							state = this.getStateVector([this.empty[0], this.empty[1]-1]);
 							if (!this.inArray(state.toString(), this.states_visited))
 								this.list_states.push([this.processHeuristics(state), state]);
 						}
 						// Check bottom
-						if ((this.empty[0]+1) <= this.lines){
+						if ((this.empty[0]+1) <= this.lines) {
 							state = this.getStateVector([this.empty[0]+1, this.empty[1]]);
 							if (!this.inArray(state.toString(), this.states_visited))
 								this.list_states.push([this.processHeuristics(state), state]);
 						}
 						// Check right
-						if ((this.empty[1]+1) <= this.columns){
+						if ((this.empty[1]+1) <= this.columns) {
 							state = this.getStateVector([this.empty[0], this.empty[1]+1]);
 							if (!this.inArray(state.toString(), this.states_visited))
 								this.list_states.push([this.processHeuristics(state), state]);
 						}
 						// Check top
-						if ((this.empty[0]-1) >= 0){
+						if ((this.empty[0]-1) >= 0) {
 							state = this.getStateVector([this.empty[0]-1, this.empty[1]]);
 							if (!this.inArray(state.toString(), this.states_visited))
 								this.list_states.push([this.processHeuristics(state), state]);
 						}
 						
 						// Sort best heuristics
-						this.list_states.sort(function(a, b){return a[0] - b[0]});
+						this.list_states.sort((a, b) => a[0] - b[0]);
 
 						// Change state empty
-						while(this.list_states.length > 0){
+						while (this.list_states.length > 0) {
 							// Get first
 							state = this.list_states.splice(0,1);
-							if (!this.inArray(state[0][1].toString(), this.states_visited)){
+							if (!this.inArray(state[0][1].toString(), this.states_visited)) {
 								this.changeState(state[0][1]);
 								break;
 							}
 						}
 						
-						if (this.states_visited.length >= this.limit_states){
+						if (this.states_visited.length >= this.limit_states) {
 							this.finishSearch(false);
 							self.postMessage({ 'command'        : 'finish', 
 								               'search'         : this.id, 
@@ -121,7 +104,7 @@ self.onmessage = event => {
 								               'new_state'      : state[0][1], 
 								               'states_visited' : this.states_visited.length});
 						}
-						else{
+						else {
 							self.postMessage({ 'command'        : 'change_state', 
 								               'search'         : this.id, 
 								               'new_state'      : state[0][1], 

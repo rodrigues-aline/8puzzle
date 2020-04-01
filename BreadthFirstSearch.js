@@ -5,8 +5,7 @@
  * Created: 2018-09-09
  **/
  
-function BreadthFirstSearch(id){
-	AbstractSearch.call(this);
+function BreadthFirstSearch(id) {
 	this.id             = id;
 	this.states_visited = [];
 	this.list_states    = [];
@@ -15,55 +14,55 @@ function BreadthFirstSearch(id){
 var breadth_search;
 
 self.onmessage = event => {
-	var data = event.data;
+	let data = event.data;
   	switch (data['command']) {
     	case 'init': 
 		
 		    // Call template Abstract Search
-    		importScripts(data['path']+'/AbstractSearch.js');
+    		importScripts(data['path'] + '/AbstractSearch.js');
     		BreadthFirstSearch.prototype = new AbstractSearch();
 			
 			BreadthFirstSearch.prototype.chooseState = async function() {
 				if (!this.checkStateExpected()){
 					if (!this.stoped){
-						var state = [];
+						let state = [];
 
 						// Check left
-						if ((this.empty[1]-1) >= 0){
+						if ((this.empty[1]-1) >= 0) {
 							state = this.getStateVector([this.empty[0], this.empty[1]-1]);
 							if (!this.inArray(state.toString(), this.states_visited))
 								this.list_states.push(state);
 						}
 						// Check bottom
-						if ((this.empty[0]+1) <= this.lines){
+						if ((this.empty[0]+1) <= this.lines) {
 							state = this.getStateVector([this.empty[0]+1, this.empty[1]]);
 							if (!this.inArray(state.toString(), this.states_visited))
 								this.list_states.push(state);
 						}
 						// Check right
-						if ((this.empty[1]+1) <= this.columns){
+						if ((this.empty[1]+1) <= this.columns) {
 							state = this.getStateVector([this.empty[0], this.empty[1]+1]);
 							if (!this.inArray(state.toString(), this.states_visited))
 								this.list_states.push(state);
 						}
 						// Check top
-						if ((this.empty[0]-1) >= 0){
+						if ((this.empty[0]-1) >= 0) {
 							state = this.getStateVector([this.empty[0]-1, this.empty[1]]);
 							if (!this.inArray(state.toString(), this.states_visited))
 								this.list_states.push(state);
 						}
 
 						// Change state empty
-						while(this.list_states.length > 0){
+						while (this.list_states.length > 0) {
 							// Get first
 							state = this.list_states.splice(0,1);
-							if (!this.inArray(state[0].toString(), this.states_visited)){
+							if (!this.inArray(state[0].toString(), this.states_visited)) {
 								this.changeState(state[0]);
 								break;
 							}
 						}
 						
-						if (this.states_visited.length >= this.limit_states){
+						if (this.states_visited.length >= this.limit_states) {
 							this.finishSearch(false);
 							self.postMessage({ 'command'        : 'finish', 
 								               'search'         : 'breadth', 
@@ -71,7 +70,7 @@ self.onmessage = event => {
 								               'new_state'      : state[0], 
 								               'states_visited' : this.states_visited.length});
 						}
-						else{
+						else {
 							self.postMessage({ 'command'        : 'change_state', 
 								               'search'         : 'breadth', 
 								               'new_state'      : state[0], 

@@ -26,24 +26,24 @@ function AbstractSearch(){
 **/
 
 AbstractSearch.prototype.createPuzzle = function(matrix) {
+	let position = 0;
 	this.puzzle  = [];
-	position     = 0;
 	this.lines   = matrix[0]-1;
 	this.columns = matrix[1]-1;
 	
-	for (var i=0;i<=this.lines;i++){
+	for (let i=0; i<=this.lines; i++) {
 		this.puzzle.push([]);
-		for(var x=0;x<=this.columns;x++){
+		for (let x=0; x<=this.columns; x++) {
 			this.puzzle[i].push({'current': position, 'expect': position});
 			position += 1;
 		}
 	}
 }
 
-AbstractSearch.prototype.shufflePuzzles = function(suffle){
-	var s = 0;
-	for (var line in this.puzzle){
-		for (var column in this.puzzle[line]){
+AbstractSearch.prototype.shufflePuzzles = function(suffle) {
+	let s = 0;
+	for (let line in this.puzzle) {
+		for (let column in this.puzzle[line]) {
 			this.puzzle[line][column]['current'] = suffle[s];
 			if (suffle[s] == 0){
 				this.empty = [parseInt(line), parseInt(column)];
@@ -53,9 +53,9 @@ AbstractSearch.prototype.shufflePuzzles = function(suffle){
 	}
 }
 
-AbstractSearch.prototype.checkStateExpected = function(){
-	for (var line in this.puzzle){
-		for (var column in this.puzzle[line]){
+AbstractSearch.prototype.checkStateExpected = function() {
+	for (let line in this.puzzle) {
+		for (let column in this.puzzle[line]) {
 			if (this.puzzle[line][column]['current'] != this.puzzle[line][column]['expect'])
 				return false;
 		}
@@ -63,10 +63,10 @@ AbstractSearch.prototype.checkStateExpected = function(){
 	return true;
 }
 
-AbstractSearch.prototype.getStateVector= function(new_empty){
-	var state = [];
-	for (var line in this.puzzle){
-		for (var column in this.puzzle[line]){
+AbstractSearch.prototype.getStateVector= function(new_empty) {
+	let state = [];
+	for (let line in this.puzzle) {
+		for (let column in this.puzzle[line]) {
 			if (line == this.empty[0] && column == this.empty[1])
 				state.push(this.puzzle[new_empty[0]][new_empty[1]]['current']);
 			else if (line == new_empty[0] && column == new_empty[1])
@@ -78,22 +78,22 @@ AbstractSearch.prototype.getStateVector= function(new_empty){
 	return state;
 }
 
-AbstractSearch.prototype.clearSearch = function(){
-	this.puzzle      = [];
-	this.finished    = false;
-	this.empty       = [0,0]; // Current possition puzzle empty
-	this.list_states = [];    // States needs to be visit
-	this.time        = '00:00:00';
+AbstractSearch.prototype.clearSearch = function() {
+	this.puzzle         = [];
+	this.finished       = false;
+	this.empty          = [0,0]; // Current possition puzzle empty
+	this.list_states    = [];    // States needs to be visit
+	this.time           = '00:00:00';
 	this.states_visited = [];
-	this.stoped = false;
+	this.stoped         = false;
 }
 
 AbstractSearch.prototype.changeState = function(new_state){
-	s = 0
-	for (var line=0;line<=this.lines;line++){
-		for (var column=0;column<=this.columns;column++){
+	let s = 0;
+	for (let line=0; line<=this.lines; line++) {
+		for (let column=0;column<=this.columns;column++) {
 			this.puzzle[line][column]['current'] = new_state[s];
-			if (new_state[s] == 0){
+			if (new_state[s] == 0) {
 				this.empty = [parseInt(line), parseInt(column)];
 			}
 			s += 1;
@@ -104,12 +104,12 @@ AbstractSearch.prototype.changeState = function(new_state){
 
 AbstractSearch.prototype.finishSearch = function(success){
 	this.finished = true;
-	this.success = success;
+	this.success  = success;
 }
 
 AbstractSearch.prototype.inArray = function(needle, haystack) {
-    var length = haystack.length;
-    for (var i = 0; i < length; i++){
+    let length = haystack.length;
+    for (let i=0; i<length; i++) {
         if (haystack[i] == needle) return true;
     }
     return false;

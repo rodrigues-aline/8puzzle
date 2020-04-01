@@ -5,8 +5,7 @@
  * Created: 2018-09-09
  **/
 
-function DepthFirstSearch(id){
-	AbstractSearch.call(this);
+function DepthFirstSearch(id) {
 	this.id             = id;
 	this.states_visited = [];
 	this.list_states    = [];
@@ -15,43 +14,43 @@ function DepthFirstSearch(id){
 var depth_search;
 
 self.onmessage = event => {
-	var data = event.data;
+	let data = event.data;
   	switch (data['command']) {
     	case 'init': 
 		
 			// Call template Abstract Search
-    		importScripts(data['path']+'/AbstractSearch.js');
+    		importScripts(data['path'] + '/AbstractSearch.js');
     		DepthFirstSearch.prototype = new AbstractSearch();
     		
 			/**
 			 * Depth Search - Choose states availables (random) 
 			 **/
 			DepthFirstSearch.prototype.chooseState = async function() {
-				if (!this.checkStateExpected()){
+				if (!this.checkStateExpected()) {
 					if (!this.stoped){
-						var state = [];
-						var state_available = [];
+						let state = [];
+						let state_available = [];
 
 						// Check left
-						if ((this.empty[1]-1) >= 0){
+						if ((this.empty[1]-1) >= 0) {
 							state = this.getStateVector([this.empty[0], this.empty[1]-1]);
 							if (!this.inArray(state.toString(), this.states_visited))
 								state_available.push(state);
 						}
 						// Check bottom
-						if ((this.empty[0]+1) <= this.lines){
+						if ((this.empty[0]+1) <= this.lines) {
 							state = this.getStateVector([this.empty[0]+1, this.empty[1]]);
 							if (!this.inArray(state.toString(), this.states_visited))
 								state_available.push(state);
 						}
 						// Check right
-						if ((this.empty[1]+1) <= this.columns){
+						if ((this.empty[1]+1) <= this.columns) {
 							state = this.getStateVector([this.empty[0], this.empty[1]+1]);
 							if (!this.inArray(state.toString(), this.states_visited))
 								state_available.push(state);
 						}
 						// Check top
-						if ((this.empty[0]-1) >= 0){
+						if ((this.empty[0]-1) >= 0) {
 							state = this.getStateVector([this.empty[0]-1, this.empty[1]]);
 							if (!this.inArray(state.toString(), this.states_visited))
 								state_available.push(state);
@@ -59,7 +58,7 @@ self.onmessage = event => {
 
 						state = [];
 						new_state = Math.floor((Math.random() * state_available.length-1) + 0);
-						for (var x=0;x<state_available.length;x++){
+						for (let x=0; x<state_available.length; x++){
 							if (x == new_state)
 								state = state_available[x];
 							else
@@ -67,21 +66,21 @@ self.onmessage = event => {
 						}
 
 						// Change state empty
-						if (state.length > 0){
+						if (state.length > 0) {
 							this.changeState(state);
 						}
-						else{
-							while(this.list_states.length > 0){
+						else {
+							while(this.list_states.length > 0) {
 								// Get last
 								state = this.list_states.pop();
-								if (!this.inArray(state.toString(), this.states_visited)){
+								if (!this.inArray(state.toString(), this.states_visited)) {
 									this.changeState(state);
 									break;
 								}
 							}
 						}
 
-						if (this.states_visited.length >= this.limit_states){
+						if (this.states_visited.length >= this.limit_states) {
 							this.finishSearch(false);
 							self.postMessage({ 'command'        : 'finish', 
 								               'search'         : 'depth', 
@@ -89,7 +88,7 @@ self.onmessage = event => {
 								               'new_state'      : state, 
 								               'states_visited' : this.states_visited.length});
 						}
-						else{
+						else {
 							self.postMessage({ 'command'        : 'change_state', 
 								               'search'         : 'depth', 
 								               'new_state'      : state, 
