@@ -15,4 +15,3 @@ Searches - Puzzle Problem
 - Choose the best states
   - **Heuristic 1**: Sum of pieces are not their correct position
   - **Heuristic 2**: Sum of the pieces paths to their correct position (Manhattan Distance)
-  - **Heuristic 3**: - 
